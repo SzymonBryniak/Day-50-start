@@ -45,7 +45,7 @@ for window_handle in driver.window_handles:
           break
 
 WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH,'/html/body/div[2]/div[2]/div/div/div/div/div[3]/div[2]/div/div[2]/div[1]'))).click()
-print(len(driver.window_handles))
+
 
 username = driver.find_element(By.XPATH, value="/html/body/div/div[2]/div[1]/form/div/div[1]/div/input")
 username.send_keys("szymonbryniakproject@gmail.com")
@@ -60,3 +60,12 @@ try:
   tinder_continue.click()
 except:
   print("elemenet not found: tinder continue 59")
+
+
+
+driver.switch_to.window(original_window)
+time.sleep(2)
+# driver.switch_to.alert().accept()
+# print(len(driver.window_handles))
+tinder_allow = driver.find_element(By.XPATH, value="/html/body/div[2]/div/div[1]/div/div/div[3]/button[1]")
+tinder_allow.click()
