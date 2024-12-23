@@ -6,8 +6,16 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import time
 
+# Solution to dismissing modal popups version 1
+
+
 edge_options = webdriver.EdgeOptions()
 edge_options.add_experimental_option("detach", True)
+edge_options.add_experimental_option("prefs", {
+    "profile.default_content_setting_values.geolocation": 1,  # Allow location
+    "profile.default_content_setting_values.notifications": 1  # Allow notifications
+})
+
 # edge_options.page_load_strategy = 'eager'
 medriver_path = "C:\webdrivers\msedgedriver.exe"  # causes browser mismatch
 service = Service(medriver_path)
@@ -61,11 +69,17 @@ try:
 except:
   print("elemenet not found: tinder continue 59")
 
-
+for window_handle in driver.window_handles:
+        if window_handle != original_window:
+            driver.switch_to.window(window_handle)
+            break
 
 driver.switch_to.window(original_window)
 time.sleep(2)
 # driver.switch_to.alert().accept()
 # print(len(driver.window_handles))
-tinder_allow = driver.find_element(By.XPATH, value="/html/body/div[2]/div/div[1]/div/div/div[3]/button[1]")
-tinder_allow.click()
+driver.switch_to.active_element.find_element(By.XPATH, value="/html/body/div[2]/div/div[1]/div/div/div[3]/button[1]").click()
+# tinder_allow = WebDriverWait(driver, 5).until(EC.element_to_be_clickable((By.XPATH, "/html/body/div[2]/div/div[1]/div/div/div[3]/button[1]"))).click()
+# tinder_allow = driver.find_element(by_chained((By.NAME, value=))
+# attr = driver.switch_to.active_element.find_element(By.XPATH, value="/html/body/div[2]/div/div[1]/div/div/div[3]/button[1]")
+# attr.click()
