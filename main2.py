@@ -6,6 +6,8 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import time
 
+# Solution for allowing prompts using clicks instead of the experimental option
+
 edge_options = webdriver.EdgeOptions()
 edge_options.add_experimental_option("detach", True)
 edge_options.add_argument("--disable-notifications")
